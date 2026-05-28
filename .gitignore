@@ -1,0 +1,20 @@
+Set-Content -Path .gitignore -Value @"
+# Ignore large data directories completely
+data/
+notebooks/.ipynb_checkpoints/
+
+# Ignore Python environment and compilation artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+ENV/
+.env
+
+# Ignore temporary local configuration caches
+.pytest_cache/
+.mlflow/
+mlruns/
+"@
