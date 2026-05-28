@@ -16,7 +16,7 @@ The Right to an Explanation: Credit officers must be able to cleanly dissect any
 Because the partnering eCommerce platform provides raw transactional records instead of structured, mature loan repayment data, there is no historical "default" flag. To construct a machine learning classification engine, we must engineer a proxy target variable for default using Recency, Frequency, and Monetary (RFM) behavioral patterns. 
 
 While necessary to establish a base risk label, this approach presents critical business risks:
-The Mapping Misalignment:** A sudden collapse in a customer's purchasing recency or frequency may simply signify a shift to an alternative merchant or an app uninstallation—not a baseline financial insolvency or intent to default. This introduces a risk of **False Positives, leading Bati Bank to deny loans to valid consumers, strangling market share growth.
+The Mapping Misalignment: A sudden collapse in a customer's purchasing recency or frequency may simply signify a shift to an alternative merchant or an app uninstallation—not a baseline financial insolvency or intent to default. This introduces a risk of False Positives, leading Bati Bank to deny loans to valid consumers, strangling market share growth.
 Underestimating Delinquency Risks: Conversely, high historical monetary volumes could reflect past behavior, masking current structural liquidity shocks. This creates False Negatives, leading to high loan default rates that erode underwriting profit margins.
 
  3. Structural Modeling Architecture Trade-offs
