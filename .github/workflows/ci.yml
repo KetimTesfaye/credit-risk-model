@@ -1,31 +1,38 @@
-Set-Content -Path .github\workflows\ci.yml -Value @"
-name: Credit Scoring CI/CD Pipeline
+name: Bati Fintech Credit Model Continuous Integration
 
 on:
   push:
-    branches: [ main, task-1 ]
+    branches: [ main, task-6 ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  test_and_lint:
+  codebase_quality_gatekeeper:
     runs-on: ubuntu-latest
+    
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+    - name: Clone Repository Repository Code
+      uses: actions/checkout@v3
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v5
+    - name: Initialize Production Python Environment
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
         cache: 'pip'
 
-    - name: Install Dependencies
+    - name: Ingest Required Libraries and Packages
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run Unit Tests
+    - name: Code Style Linting Analysis (Flake8 Check)
       run: |
-        pytest tests/
-"@
+        # Stop build if syntax errors or undefined names are discovered
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Warning alerts flag minor PEP8 formatting violations without breaking build pipelines
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Execute Automated Unit Testing Suite (PyTest Verification)
+      run: |
+        python -m pytest
